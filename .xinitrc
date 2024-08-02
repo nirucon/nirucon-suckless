@@ -4,8 +4,10 @@
 # Set keyboard layout to Swedish
 setxkbmap se &
 
-# Start nirubar-dwm
-~/.config/suckless/nirubar-dwm/nirubar-dwm &
+# Start nirubar-dwm-*
+
+
+#~/.config/suckless/nirubar-dwm/nirubar-dwm &
 
 # Start compositor
 picom -f &
