@@ -52,11 +52,6 @@ eval "`dircolors`"
 # Welcome message (no color codes here)
 echo -e "${GREEN}Welcome, $USER!${RESET}"
 
-# Check and show package updates (only if Arch Linux)
-if [ -f /etc/arch-release ]; then
-  echo -e "${YELLOW}$(check_updates_pacman) $(check_updates_yay)${RESET}"
-fi
-
 # Colored output for ls
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
