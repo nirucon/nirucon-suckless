@@ -9,41 +9,38 @@ exec >> ~/.dwm/autostart.log 2>&1
 sleep 1
 
 # Start xautolock for screen locking after 10 minutes of inactivity
-xautolock -time 10 -locker slock &
+if command -v xautolock &> /dev/null; then
+    xautolock -time 10 -locker slock &
+else
+    echo "xautolock not found. Please install it."
+fi
 
 # Brief delay before starting dunst
 sleep 2
 
 # Start dunst for notifications
-dunst &
+if command -v dunst &> /dev/null; then
+    dunst &
+else
+    echo "dunst not found. Please install it."
+fi
 
 # Set wallpaper using feh
-#feh --bg-scale /path/to/your/wallpaper.jpg &
-
-# Start system tray applications
-#pasystray &
-
-# Start network manager applet
-#nm-applet &
-
-# Start clipboard manager
-#copyq &
-
-# Start power management tool
-#tlp start &
-
-# Launch frequently used applications
-#brave &
-#st &
-
-# Start sxhkd for custom keybindings
-#sxhkd &
+if command -v feh &> /dev/null; then
+    #feh --bg-scale /path/to/your/wallpaper.jpg &
+else
+    echo "feh not found. Please install it."
+fi
 
 # Brief delay before greeter
 sleep 2
 
 # Launch nirucon-greeter
-~/.config/nirucon-greeter/greeter &
+if [ -f ~/.config/nirucon-greeter/greeter ]; then
+    ~/.config/nirucon-greeter/greeter &
+else
+    echo "nirucon-greeter not found."
+fi
 
 # Start Nextcloud client if installed
 if command -v nextcloud &> /dev/null; then
