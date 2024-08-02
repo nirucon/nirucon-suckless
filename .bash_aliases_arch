@@ -113,6 +113,6 @@ serve() {
 }
 
 # Source the .bash-aliases in .bashrc
-if [ -f ~/.bash-aliases ]; then
-    . ~/.bash-aliases
+if [ -f ~/.bash_aliases_arch ]; then
+    . ~/.bash_aliases_arch
 fi
