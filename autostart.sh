@@ -25,13 +25,6 @@ else
     echo "dunst not found. Please install it."
 fi
 
-# Set wallpaper using feh
-if command -v feh &> /dev/null; then
-    #feh --bg-scale /path/to/your/wallpaper.jpg &
-else
-    echo "feh not found. Please install it."
-fi
-
 # Brief delay before greeter
 sleep 2
 
