@@ -36,23 +36,25 @@ function parse_git_branch {
   git branch 2>/dev/null | grep '*' | sed 's/* //'
 }
 
-# Function to check for updates using pacman
-function check_updates_pacman {
-  if command -v checkupdates &> /dev/null; then
-    echo -n "$(checkupdates | wc -l) updates available in pacman."
-  else
-    echo -n "checkupdates not installed."
-  fi
-}
+# Function to check for updates using pacman (only if Arch Linux)
+if [ -f /etc/arch-release ]; then
+  function check_updates_pacman {
+    if command -v checkupdates &> /dev/null; then
+      echo -n "$(checkupdates | wc -l) updates available in pacman."
+    else
+      echo -n "checkupdates not installed."
+    fi
+  }
 
-# Function to check for updates using yay
-function check_updates_yay {
-  if command -v yay &> /dev/null; then
-    echo -n "$(yay -Qu | wc -l) updates available in aur."
-  else
-    echo -n "yay not installed."
+  # Function to check for updates using yay (only if Arch Linux)
+  function check_updates_yay {
+    if command -v yay &> /dev/null; then
+      echo -n "$(yay -Qu | wc -l) updates available in aur."
+    else
+      echo -n "yay not installed."
+    fi
   fi
-}
+fi
 
 # Enhanced prompt with Git branch
 PS1="${BLUE}\u${GREEN}@\h ${YELLOW}\w${RED}\$(parse_git_branch)${RESET}\$ "
@@ -70,8 +72,10 @@ eval "`dircolors`"
 # Welcome message (no color codes here)
 echo -e "${GREEN}Welcome, $USER!${RESET}"
 
-# Check and show package updates (no color codes here)
-#echo -e "${YELLOW}$(check_updates_pacman) $(check_updates_yay)${RESET}"
+# Check and show package updates (only if Arch Linux)
+if [ -f /etc/arch-release ]; then
+  echo -e "${YELLOW}$(check_updates_pacman) $(check_updates_yay)${RESET}"
+fi
 
 # Colored output for ls
 export CLICOLOR=1
