@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Function to get the hostname
+get_hostname() {
+  if command -v hostname &> /dev/null; then
+    hostname=$(hostname)
+  else
+    hostname=$(cat /proc/sys/kernel/hostname)
+  fi
+  echo "$hostname"
+}
+
+# Get user and hostname
+user=$(whoami)
+hostname=$(get_hostname)
+
+# Get kernel info
+kernel_info=$(uname -r)
+
+# Get pacman updates
+if command -v checkupdates &> /dev/null; then
+  pacman_updates=$(checkupdates | wc -l)
+else
+  pacman_updates="N/A"
+fi
+
+# Get AUR updates
+if command -v yay &> /dev/null; then
+  aur_updates=$(yay -Qum | wc -l)
+else
+  aur_updates="N/A"
+fi
+
+# Fetch a random quote from stoic-quotes.txt
+stoic_quote=$(shuf -n 1 ~/.config/nirucon-greeter/stoic-quotes.txt)
+
+# Form the message
+message="<b>Memento Mori</b>\n\nWelcome $user @ $hostname\nKernel: $kernel_info\nPacman updates: $pacman_updates\nAUR updates: $aur_updates\n\n$stoic_quote\n\nTo turn off this script, comment the line in ~/.dwn/autostart.sh and to modify it edit the script in ~/.config/nirucon-greeter/"
+
+# Display the notification
+notify-send "Greeter" "$message" --icon=dialog-information --expire-time=15000 --hint=int:transient:1
+
+exit 0
