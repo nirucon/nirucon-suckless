@@ -1,5 +1,4 @@
-# .bashrc Nicklas Rudolfsson
-# For Arch Linux
+# .bashrc by Nicklas Rudolfsson
 # https://github.com/nirucon
 
 # Enable the subsequent settings only in interactive sessions
@@ -11,10 +10,19 @@ esac
 # Ensure home directory is the default directory when starting a new shell
 cd $HOME
 
-# Load custom aliases from .bash_aliases if it exists
-if [ -f "$HOME/.bash_aliases" ]; then
-    source "$HOME/.bash_aliases"
-fi
+# Function to include the appropriate alias file based on the Linux distribution
+function include_aliases {
+  if [ -f /etc/arch-release ]; then
+    [ -f "$HOME/.bash_aliases_arch" ] && source "$HOME/.bash_aliases_arch"
+  elif [ -f /etc/void-release ]; then
+    [ -f "$HOME/.bash_aliases_void" ] && source "$HOME/.bash_aliases_void"
+  elif [ -f /etc/debian_version ]; then
+    [ -f "$HOME/.bash_aliases_debian" ] && source "$HOME/.bash_aliases_debian"
+  fi
+}
+
+# Load custom aliases based on the distribution
+include_aliases
 
 # Colors
 BLUE="\033[0;34m"
