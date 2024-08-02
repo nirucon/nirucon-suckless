@@ -114,7 +114,8 @@ serve() {
     python -m http.server "$port"
 }
 
-# Source the .bash-aliases in .bashrc
-if [ -f ~/.bash_aliases_arch ]; then
-    . ~/.bash_aliases_arch
+# Ensure this file is sourced correctly if called directly
+if [ "$0" = "$BASH_SOURCE" ]; then
+    echo "This file should be sourced, not executed directly."
+    return 1
 fi
