@@ -1,2 +1,0 @@
-#slock void linux dep
-sudo xbps-install imlib2-devel libXrandr-devel
