@@ -1,21 +1,23 @@
 # .bash-aliases_arch by Nicklas Rudolfsson
 # https://github.com/nirucon
 
+# Check if a command exists before defining an alias or function
+
 # List stuff
 alias lss='ls --human-readable --size -1 -S --classify' # list and sort size
 alias lst='ls -t -1' # list by mod time
 alias count='find . -type f | wc -l' # count files in dir
 
 # Applications
-alias mail='aerc' # mail client
-alias fm='ranger' # ranger file manager
-alias r='ranger' # ranger file manager
-alias nano='nano -l' # line numbers in nano
-alias virtnet='sudo virsh net-start default' # fix virt-manager net
+command -v aerc &> /dev/null && alias mail='aerc' # mail client
+command -v ranger &> /dev/null && alias fm='ranger' # ranger file manager
+command -v ranger &> /dev/null && alias r='ranger' # ranger file manager
+command -v nano &> /dev/null && alias nano='nano -l' # line numbers in nano
+command -v virsh &> /dev/null && alias virtnet='sudo virsh net-start default' # fix virt-manager net
 
 # Utilities
-alias cal='cal -w -m' # calendar with week numbers
-alias calc="bc" # calculator
+command -v cal &> /dev/null && alias cal='cal -w -m' # calendar with week numbers
+command -v bc &> /dev/null && alias calc="bc" # calculator
 alias c='clear' # clear terminal
 alias f='find . -name' # find files by name
 alias preview='head -n 20' # quick file preview
@@ -47,31 +49,31 @@ alias up4='cd ../../../..'
 alias up5='cd ../../../../..'
 
 # Package management for pacman
-alias update='sudo pacman -Syuu'
-alias install='sudo pacman -S'
-alias remove='sudo pacman -R'
-alias pacup='sudo pacman -Syuu'
-alias paci='sudo pacman -S'
-alias pacr='sudo pacman -R'
+command -v pacman &> /dev/null && alias update='sudo pacman -Syuu'
+command -v pacman &> /dev/null && alias install='sudo pacman -S'
+command -v pacman &> /dev/null && alias remove='sudo pacman -R'
+command -v pacman &> /dev/null && alias pacup='sudo pacman -Syuu'
+command -v pacman &> /dev/null && alias paci='sudo pacman -S'
+command -v pacman &> /dev/null && alias pacr='sudo pacman -R'
 
 # Snap package management
-alias snup='snap refresh'
+command -v snap &> /dev/null && alias snup='snap refresh'
 
 # Yay (Yet Another Yaourt) AUR helper
-alias yayupdate='yay -Syu'
-alias yayinstall='yay -S'
-alias yayremove='yay -R'
-alias yaysearch='yay -Ss'
-alias yayinfo='yay -Qi'
-alias yaydepends='yay -Qi | grep Depends'
+command -v yay &> /dev/null && alias yayupdate='yay -Syu'
+command -v yay &> /dev/null && alias yayinstall='yay -S'
+command -v yay &> /dev/null && alias yayremove='yay -R'
+command -v yay &> /dev/null && alias yaysearch='yay -Ss'
+command -v yay &> /dev/null && alias yayinfo='yay -Qi'
+command -v yay &> /dev/null && alias yaydepends='yay -Qi | grep Depends'
 
 # Paru AUR helper
-alias paruupdate='paru -Syu'
-alias paruinstall='paru -S'
-alias paruremove='paru -R'
-alias parusearch='paru -Ss'
-alias paruinfo='paru -Qi'
-alias parudepends='paru -Qi | grep Depends'
+command -v paru &> /dev/null && alias paruupdate='paru -Syu'
+command -v paru &> /dev/null && alias paruinstall='paru -S'
+command -v paru &> /dev/null && alias paruremove='paru -R'
+command -v paru &> /dev/null && alias parusearch='paru -Ss'
+command -v paru &> /dev/null && alias paruinfo='paru -Qi'
+command -v paru &> /dev/null && alias parudepends='paru -Qi | grep Depends'
 
 # Frequent directories
 alias cnext='cd ~/Nextcloud'
@@ -82,24 +84,24 @@ alias cdl='cd ~/Downloads'
 alias fgrep='grep -rnw .' # recursive grep with line numbers
 
 # Clipboard management
-alias copy='xclip -selection clipboard'
-alias paste='xclip -selection clipboard -o'
+command -v xclip &> /dev/null && alias copy='xclip -selection clipboard'
+command -v xclip &> /dev/null && alias paste='xclip -selection clipboard -o'
 
 # Functions
 extract() {
-    if [ -f $1 ]; then
+    if [ -f "$1" ]; then
         case $1 in
-            *.tar.bz2)   tar xjf $1    ;;
-            *.tar.gz)    tar xzf $1    ;;
-            *.bz2)       bunzip2 $1    ;;
-            *.rar)       unrar x $1    ;;
-            *.gz)        gunzip $1     ;;
-            *.tar)       tar xf $1     ;;
-            *.tbz2)      tar xjf $1    ;;
-            *.tgz)       tar xzf $1    ;;
-            *.zip)       unzip $1      ;;
-            *.Z)         uncompress $1 ;;
-            *.7z)        7z x $1       ;;
+            *.tar.bz2)   tar xjf "$1"    ;;
+            *.tar.gz)    tar xzf "$1"    ;;
+            *.bz2)       bunzip2 "$1"    ;;
+            *.rar)       unrar x "$1"    ;;
+            *.gz)        gunzip "$1"     ;;
+            *.tar)       tar xf "$1"     ;;
+            *.tbz2)      tar xjf "$1"    ;;
+            *.tgz)       tar xzf "$1"    ;;
+            *.zip)       unzip "$1"      ;;
+            *.Z)         uncompress "$1" ;;
+            *.7z)        7z x "$1"       ;;
             *)           echo "'$1' cannot be extracted via extract()" ;;
         esac
     else
