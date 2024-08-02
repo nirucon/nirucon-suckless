@@ -36,25 +36,6 @@ function parse_git_branch {
   git branch 2>/dev/null | grep '*' | sed 's/* //'
 }
 
-# Function to check for updates using pacman (only if Arch Linux)
-if [ -f /etc/arch-release ]; then
-  function check_updates_pacman {
-    if command -v checkupdates &> /dev/null; then
-      echo -n "$(checkupdates | wc -l) updates available in pacman."
-    else
-      echo -n "checkupdates not installed."
-    fi
-  }
-
-  # Function to check for updates using yay (only if Arch Linux)
-  function check_updates_yay {
-    if command -v yay &> /dev/null; then
-      echo -n "$(yay -Qu | wc -l) updates available in aur."
-    else
-      echo -n "yay not installed."
-    fi
-fi
-
 # Enhanced prompt with Git branch
 PS1="${BLUE}\u${GREEN}@\h ${YELLOW}\w${RED}\$(parse_git_branch)${RESET}\$ "
 
