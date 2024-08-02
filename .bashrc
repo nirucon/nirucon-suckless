@@ -53,7 +53,6 @@ if [ -f /etc/arch-release ]; then
     else
       echo -n "yay not installed."
     fi
-  fi
 fi
 
 # Enhanced prompt with Git branch
