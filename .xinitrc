@@ -1,12 +1,13 @@
-# .xinitrc by Nicklas Rudolfsson for my Arch Linux setup
+# .xinitrc by Nicklas Rudolfsson for my Arch/Void/Debian Linux setup
 # https://github.com/nirucon
 
 # Set keyboard layout to Swedish
 setxkbmap se &
 
+# Insert from post install
 # Start nirubar-dwm-*
 
-
+# Old bar
 #~/.config/suckless/nirubar-dwm/nirubar-dwm &
 
 # Start compositor
