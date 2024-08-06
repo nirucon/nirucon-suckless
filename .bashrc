@@ -12,12 +12,21 @@ cd $HOME
 
 # Function to include the appropriate alias file based on the Linux distribution
 function include_aliases {
-  if [ -f /etc/arch-release ]; then
-    [ -f "$HOME/.bash_aliases_arch" ] && source "$HOME/.bash_aliases_arch"
-  elif [ -f /etc/void-release ]; then
-    [ -f "$HOME/.bash_aliases_void" ] && source "$HOME/.bash_aliases_void"
-  elif [ -f /etc/debian_version ]; then
-    [ -f "$HOME/.bash_aliases_debian" ] && source "$HOME/.bash_aliases_debian"
+  if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    case "$ID" in
+      arch)
+        [ -f "$HOME/.bash_aliases_arch" ] && source "$HOME/.bash_aliases_arch"
+        ;;
+      void)
+        [ -f "$HOME/.bash_aliases_void" ] && source "$HOME/.bash_aliases_void"
+        ;;
+      debian|ubuntu)
+        [ -f "$HOME/.bash_aliases_debian" ] && source "$HOME/.bash_aliases_debian"
+        ;;
+      *)
+        ;;
+    esac
   fi
 }
 
@@ -25,11 +34,11 @@ function include_aliases {
 include_aliases
 
 # Colors
-BLUE="\033[0;34m"
-GREEN="\033[0;32m"
-YELLOW="\033[0;33m"
-RED="\033[0;31m"
-RESET="\033[0m"
+BLUE="\[\033[0;34m\]"
+GREEN="\[\033[0;32m\]"
+YELLOW="\[\033[0;33m\]"
+RED="\[\033[0;31m\]"
+RESET="\[\033[0m\]"
 
 # Function to get the current git branch
 function parse_git_branch {
@@ -50,7 +59,7 @@ export LS_OPTIONS='--color=auto'
 eval "`dircolors`"
 
 # Welcome message (no color codes here)
-echo -e "${GREEN}Welcome, $USER!${RESET}"
+echo -e "\033[0;32mWelcome, $USER!\033[0m"
 
 # Colored output for ls
 export CLICOLOR=1
@@ -67,7 +76,7 @@ if command -v bat &> /dev/null; then
 fi
 
 # Command execution time
-PROMPT_COMMAND='echo -e "\e[0;36m$(date +%H:%M:%S)\e[0m $(($(date +%s) - $(date +%s -r /proc/$$/stat)))s"'
+#PROMPT_COMMAND='echo -e "\[\e[0;36m\]$(date +%H:%M:%S)\[\e[0m\] $(($(date +%s) - $(date +%s -r /proc/$$/stat)))s"'
 
 # Load Starship prompt if available
 if command -v starship &> /dev/null; then
@@ -77,7 +86,7 @@ fi
 # Function to run havamal script with red output
 function run_havamal {
   ~/.config/havamal/havamal | while IFS= read -r line; do
-    echo -e "${RED}${line}${RESET}"
+    echo -e "\033[0;31m${line}\033[0m"
   done
 }
 run_havamal
