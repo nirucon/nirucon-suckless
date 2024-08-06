@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# autostart script for dwm patch
+# autostart script for dwm patch made for my arch, void and debian setup
 
 # Redirect output to log file
 exec >> ~/.dwm/autostart.log 2>&1
@@ -26,7 +26,7 @@ else
 fi
 
 # Start PipeWire on Void Linux if installed
-if [ -f /etc/void-release ] && command -v pipewire &> /dev/null; then
+if grep -q "Void" /etc/os-release && command -v pipewire &> /dev/null; then
     pipewire &
     pipewire-pulse &
     wireplumber &
