@@ -25,6 +25,16 @@ else
     echo "dunst not found. Please install it."
 fi
 
+# Start PipeWire on Void Linux if installed
+if [ -f /etc/void-release ] && command -v pipewire &> /dev/null; then
+    pipewire &
+    pipewire-pulse &
+    wireplumber &
+    volumeicon &
+else
+    echo "PipeWire not found or not on Void Linux."
+fi
+
 # Brief delay before greeter
 sleep 2
 
