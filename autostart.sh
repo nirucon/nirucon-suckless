@@ -52,3 +52,6 @@ if command -v nextcloud &> /dev/null; then
 else
     echo "Nextcloud client is not installed."
 fi
+
+# Start flameshot
+flameshot &
