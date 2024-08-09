@@ -30,9 +30,16 @@ if grep -q "Void" /etc/os-release && command -v pipewire &> /dev/null; then
     pipewire &
     pipewire-pulse &
     wireplumber &
-    volumeicon &
 else
     echo "PipeWire not found or not on Void Linux."
+fi
+
+# Start volumeicon if installed
+if command -v nextcloud &> /dev/null; then
+    sleep 7
+    volumeicon &
+else
+    echo "volumeicon client is not installed."
 fi
 
 # Brief delay before greeter
@@ -50,8 +57,13 @@ if command -v nextcloud &> /dev/null; then
     sleep 7
     nextcloud --background &
 else
-    echo "Nextcloud client is not installed."
+    echo "nextcloud client is not installed."
 fi
 
-# Start flameshot
-flameshot &
+# Start flameshort if installed
+if command -v nextcloud &> /dev/null; then
+    sleep 7
+    flameshot
+else
+    echo "flameshot is not installed."
+fi
