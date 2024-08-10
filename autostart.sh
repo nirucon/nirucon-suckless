@@ -42,6 +42,14 @@ else
     echo "volumeicon client is not installed."
 fi
 
+# Start flameshort if installed
+if command -v nextcloud &> /dev/null; then
+    sleep 7
+    flameshot
+else
+    echo "flameshot is not installed."
+fi
+
 # Brief delay before greeter
 sleep 2
 
@@ -54,16 +62,8 @@ fi
 
 # Start Nextcloud client if installed
 if command -v nextcloud &> /dev/null; then
-    sleep 7
+    sleep 4
     nextcloud --background &
 else
     echo "nextcloud client is not installed."
-fi
-
-# Start flameshort if installed
-if command -v nextcloud &> /dev/null; then
-    sleep 7
-    flameshot
-else
-    echo "flameshot is not installed."
 fi
