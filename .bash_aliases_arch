@@ -21,6 +21,7 @@ command -v bc &> /dev/null && alias calc="bc" # calculator
 alias c='clear' # clear terminal
 alias f='find . -name' # find files by name
 alias preview='head -n 20' # quick file preview
+alias ff='pyfiglet -s -f small $(fastfetch -s os --format json | jq -r '.[0].result.name') && fastfetch -l none' ## fastfetch figlet logo
 
 # Safety measures for file operations
 alias cp='cp -i'
