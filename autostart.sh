@@ -45,7 +45,7 @@ fi
 # Start flameshort if installed
 if command -v flameshot &> /dev/null; then
     sleep 1
-    flameshot
+    flameshot &
 else
     echo "flameshot is not installed."
 fi
