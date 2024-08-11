@@ -35,16 +35,16 @@ else
 fi
 
 # Start volumeicon if installed
-if command -v nextcloud &> /dev/null; then
-    sleep 7
+if command -v volumeicon &> /dev/null; then
+    sleep 1
     volumeicon &
 else
     echo "volumeicon client is not installed."
 fi
 
 # Start flameshort if installed
-if command -v nextcloud &> /dev/null; then
-    sleep 7
+if command -v flameshot &> /dev/null; then
+    sleep 1
     flameshot
 else
     echo "flameshot is not installed."
