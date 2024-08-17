@@ -15,6 +15,12 @@ command -v ranger &> /dev/null && alias r='ranger' # ranger file manager
 command -v nano &> /dev/null && alias nano='nano -l' # line numbers in nano
 command -v virsh &> /dev/null && alias virtnet='sudo virsh net-start default' # fix virt-manager net
 
+# brightnessctl
+alias bl100='brightnessctl set 100%'
+alias bl75='brightnessctl set 75%'
+alias bl50='brightnessctl set 50%'
+alias bl25='brightnessctl set 25%'
+
 # Utilities
 command -v cal &> /dev/null && alias cal='cal -w -m' # calendar with week numbers
 command -v bc &> /dev/null && alias calc="bc" # calculator
