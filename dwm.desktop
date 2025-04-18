@@ -1,8 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=dwm
+Name=dwm (x)
 Comment=Dynamic window manager
 #Exec=dwm
-Exec=/home/niru/.dwm/dwm_autostart.sh
+Exec=~/.dwm/dwm_autostart.sh
 Icon=dwm
 Type=XSession
