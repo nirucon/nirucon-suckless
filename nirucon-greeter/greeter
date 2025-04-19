@@ -21,7 +21,7 @@ kernel_info=$(uname -r)
 stoic_quote=$(shuf -n 1 ~/.config/nirucon-greeter/stoic-quotes.txt)
 
 # Form the message
-message="<b>Memento Mori</b>\n\nWelcome $user @ $hostname\nKernel: $kernel_info\n\n$stoic_quote\n\nTo turn off this script, comment the line in ~/.dwn/autostart.sh and to modify it edit the script in ~/.config/nirucon-greeter/"
+message="<b>Memento Mori</b>\n\nWelcome $user @ $hostname\nKernel: $kernel_info\n\n$stoic_quote\n\nTo turn off this script, comment the line in ~/.dwn/dwm_autostart.sh and to modify it edit the script in ~/.config/nirucon-greeter/"
 
 # Display the notification
 notify-send "Greeter" "$message" --icon=dialog-information --expire-time=15000 --hint=int:transient:1
