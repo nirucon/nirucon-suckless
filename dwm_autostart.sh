@@ -49,7 +49,7 @@ fi
 picom -f &
 
 # Restore wallpaper
-nitrogen --restore &
+feh --randomize --bg-fill ~/Pictures/Wallpapers/* &
 
 # restart dwm
 while true; do
