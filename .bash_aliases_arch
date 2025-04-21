@@ -15,6 +15,9 @@ command -v ranger &> /dev/null && alias r='ranger' # ranger file manager
 command -v nano &> /dev/null && alias nano='nano -l' # line numbers in nano
 command -v virsh &> /dev/null && alias virtnet='sudo virsh net-start default' # fix virt-manager net
 
+# virt-manager
+alias virtstart='sudo systemctl enable --now libvirtd.service'
+
 # brightnessctl
 alias bl100='brightnessctl set 100%'
 alias bl75='brightnessctl set 75%'
