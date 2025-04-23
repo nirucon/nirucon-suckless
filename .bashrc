@@ -17,6 +17,20 @@ function include_aliases {
     case "$ID" in
       arch)
         [ -f "$HOME/.bash_aliases_arch" ] && source "$HOME/.bash_aliases_arch"
+
+# -------------------------------------
+# Prompt with colors
+# -------------------------------------
+RED='\[\e[0;31m\]'
+GREEN='\[\e[0;32m\]'
+YELLOW='\[\e[0;33m\]'
+BLUE='\[\e[0;34m\]'
+MAGENTA='\[\e[0;35m\]'
+CYAN='\[\e[0;36m\]'
+RESET='\[\e[0m\]'
+
+PS1="${CYAN}[\u${RESET}@${GREEN}\h ${YELLOW}\W${CYAN}]\$ ${RESET}"
+
         ;;
       void)
         [ -f "$HOME/.bash_aliases_void" ] && source "$HOME/.bash_aliases_void"
@@ -90,3 +104,20 @@ function run_havamal {
   done
 }
 run_havamal
+
+# -------------------------------------
+# LS_COLORS setup for colored output
+# -------------------------------------
+if command -v vivid >/dev/null 2>&1; then
+  export LS_COLORS="$(vivid generate dracula)"
+elif command -v dircolors >/dev/null 2>&1; then
+  eval "$(dircolors -b)"
+fi
+
+# -------------------------------------
+# Colored ls aliases
+# -------------------------------------
+alias ls='ls --color=auto'
+alias ll='ls -lah --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
